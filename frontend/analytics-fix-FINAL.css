@@ -1,0 +1,118 @@
+/* analytics-fix-FINAL.css */
+/* Adicione este arquivo DEPOIS do analytics.css no HTML */
+
+/* ========================================
+   CORREÇÃO PRINCIPAL: GARANTIR ALTURA DOS CANVAS
+   ======================================== */
+
+/* Forçar altura mínima para TODOS os canvas */
+canvas {
+    display: block !important;
+    min-height: 250px !important;
+    height: 250px !important;
+    width: 100% !important;
+}
+
+/* Containers de gráficos - altura garantida */
+.chart-container {
+    min-height: 350px !important;
+    height: 350px !important;
+    position: relative !important;
+    display: block !important;
+    background: white;
+}
+
+/* Canvas dentro de containers - ajuste de altura */
+.chart-container canvas {
+    min-height: 280px !important;
+    height: 280px !important;
+}
+
+/* Gráficos de pizza/rosca - altura maior */
+.pie-chart-container {
+    min-height: 400px !important;
+    height: 400px !important;
+}
+
+.pie-chart-container canvas {
+    min-height: 320px !important;
+    height: 320px !important;
+}
+
+/* Container de métrica com gráfico pequeno */
+.metric-chart-container {
+    min-height: 200px !important;
+    height: 200px !important;
+    position: relative !important;
+}
+
+.metric-chart-container canvas {
+    min-height: 180px !important;
+    height: 180px !important;
+}
+
+/* Garantir que rows de gráficos tenham altura */
+.chart-row {
+    min-height: 350px !important;
+}
+
+/* Forçar visibilidade das seções ativas */
+.dashboard-section {
+    display: none !important;
+}
+
+.dashboard-section.active {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+/* Garantir que os containers sejam visíveis */
+.chart-row .chart-container {
+    min-height: 350px !important;
+    height: 350px !important;
+    flex: 1;
+}
+
+/* Container específico para o gráfico na seção de engajamento */
+.full-width.chart-container {
+    width: 100% !important;
+    min-height: 350px !important;
+}
+
+/* Garantir dimensões para o wrapper do canvas no HTML */
+.chart-container > div {
+    height: 100% !important;
+    min-height: 300px !important;
+}
+
+/* ========================================
+   AJUSTES ESPECÍFICOS POR ID DE CANVAS
+   ======================================== */
+
+#feedback-chart,
+#hours-chart,
+#weekday-chart,
+#areas-chart,
+#intents-chart,
+#users-distribution-chart {
+    min-height: 250px !important;
+    height: auto !important;
+    max-height: 350px !important;
+}
+
+/* ========================================
+   RESPONSIVIDADE
+   ======================================== */
+
+@media (max-width: 768px) {
+    .chart-container {
+        min-height: 300px !important;
+        height: 300px !important;
+    }
+    
+    canvas {
+        min-height: 220px !important;
+        height: 220px !important;
+    }
+}

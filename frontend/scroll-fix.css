@@ -1,0 +1,43 @@
+/* Correção para mensagens longas */
+.message-content {
+    max-height: 70vh; /* Limita a altura a 70% da altura visível da janela */
+    overflow-y: auto; /* Adiciona rolagem vertical quando necessário */
+    position: relative; /* Para o posicionamento correto da barra de rolagem */
+}
+
+/* Indicador visual de que há mais conteúdo */
+.message-content.scrollable:after {
+    content: "⬇️ Deslize para ver mais";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, var(--message-ai-bg));
+    text-align: center;
+    padding: 5px;
+    font-size: 0.8rem;
+    color: var(--primary-color);
+    pointer-events: none; /* Permite clicar através do indicador */
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+/* Mostra o indicador apenas quando há conteúdo a rolar */
+.message-content.has-more-content:after {
+    opacity: 1;
+}
+
+/* Melhora na aparência da barra de rolagem */
+.message-content::-webkit-scrollbar {
+    width: 6px;
+}
+
+.message-content::-webkit-scrollbar-track {
+    background: rgba(0,0,0,0.05);
+    border-radius: 3px;
+}
+
+.message-content::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 3px;
+}

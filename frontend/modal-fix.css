@@ -1,0 +1,67 @@
+/* Correções para rolagem no modal de arquitetura */
+
+/* Garante que o modal ocupe a maior parte da tela */
+.modal-content {
+    max-height: 90vh; /* 90% da altura da viewport */
+    display: flex;
+    flex-direction: column;
+}
+
+/* Garante que modal-body ocupe todo o espaço disponível */
+.modal-body {
+    flex: 1;
+    overflow: hidden;
+    min-height: 300px; /* altura mínima */
+}
+
+/* Permite rolagem dentro das abas */
+.tab-content {
+    height: 100%;
+    overflow-y: auto;
+    padding: 1rem;
+}
+
+/* Melhora a visualização da árvore de arquitetura */
+.architecture-tree, 
+.architecture-summary, 
+.json-viewer {
+    min-height: 100%;
+    overflow-y: auto;
+    padding-bottom: 2rem;
+}
+
+/* Estiliza a barra de rolagem */
+.tab-content::-webkit-scrollbar {
+    width: 8px;
+}
+
+.tab-content::-webkit-scrollbar-track {
+    background: #f1f5f9;
+    border-radius: 4px;
+}
+
+.tab-content::-webkit-scrollbar-thumb {
+    background: #2563eb;
+    border-radius: 4px;
+}
+
+/* Indicador visual de rolagem (opcional) */
+.tab-content::after {
+    content: "";
+    display: block;
+    height: 30px;
+}
+
+/* Específico para o visualizador JSON */
+#jsonTab pre.json-viewer {
+    max-height: none;
+    overflow-y: visible;
+}
+
+/* Garantir que botões não sejam afetados */
+.modal-tabs button,
+.modal-filters button {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}

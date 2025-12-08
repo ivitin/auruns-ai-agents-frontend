@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analytics - Industrial AI Agent</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="analytics.css">
+    <link rel="stylesheet" href="analytics-fix-FINAL.css"> <!-- ✅ CSS DE CORREÇÃO ADICIONADO -->
+    <!-- Chart.js para gráficos -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <h1>🤖 Analytics Dashboard</h1>
+                <p>Unified Namespace - Indústria 4.0</p>
+            </div>
+            <div class="header-actions">
+                <button id="refreshBtn" class="header-btn" title="Atualizar dados">
+                    🔄 Atualizar
+                </button>
+                <button id="exportBtn" class="header-btn" title="Exportar relatório">
+                    📥 Exportar
+                </button>
+                <button id="backToChat" class="header-btn" title="Voltar ao chat">
+                    💬 Voltar ao Chat
+                </button>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <div class="analytics-content">
+            <!-- Sidebar -->
+            <aside class="analytics-sidebar">
+                <div class="sidebar-section">
+                    <h3>📊 Navegação</h3>
+                    <div class="nav-list">
+                        <button class="nav-btn active" data-section="overall">Visão Geral</button>
+                        <button class="nav-btn" data-section="usage">Padrões de Uso</button>
+                        <button class="nav-btn" data-section="content">Conteúdo</button>
+                        <button class="nav-btn" data-section="performance">Performance</button>
+                        <button class="nav-btn" data-section="engagement">Engajamento</button>
+                    </div>
+                </div>
+
+                <div class="sidebar-section">
+                    <h3>⚙️ Filtros</h3>
+                    <div class="filter-group">
+                        <label for="dateRangeFilter">Período</label>
+                        <select id="dateRangeFilter">
+                            <option value="all">Todos os dados</option>
+                            <option value="today">Hoje</option>
+                            <option value="week">Últimos 7 dias</option>
+                            <option value="month">Últimos 30 dias</option>
+                        </select>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Dashboard Area -->
+            <main class="dashboard-container">
+                <div id="loading-overlay" class="loading-overlay">
+                    <div class="loading-spinner">Carregando dados...</div>
+                </div>
+
+                <!-- Seção: Visão Geral -->
+                <section id="overall-section" class="dashboard-section active">
+                    <h2>📈 Visão Geral do Sistema</h2>
+                    
+                    <div class="metrics-grid">
+                        <div class="metric-card">
+                            <div class="metric-title">Usuários</div>
+                            <div class="metric-value" id="total-users">--</div>
+                            <div class="metric-subtitle">Usuários ativos (24h): <span id="active-users">--</span></div>
+                        </div>
+
+                        <div class="metric-card">
+                            <div class="metric-title">Interações</div>
+                            <div class="metric-value" id="total-interactions">--</div>
+                            <div class="metric-subtitle">Média por usuário: <span id="avg-interactions">--</span></div>
+                        </div>
+
+                        <div class="metric-card highlight">
+                            <div class="metric-title">Satisfação</div>
+                            <div class="metric-value" id="satisfaction-rate">--</div>
+                            <div class="metric-subtitle">Taxa de feedback: <span id="feedback-rate">--</span>%</div>
+                        </div>
+                        
+                        <div class="metric-card">
+                            <div class="metric-title">Feedback</div>
+                                <div class="metric-chart-container pie-chart-container">
+                                <canvas id="feedback-chart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Seção: Padrões de Uso -->
+                <section id="usage-section" class="dashboard-section">
+                    <h2>⏱️ Padrões de Uso</h2>
+                    
+                    <div class="chart-row">
+                        <div class="chart-container">
+                            <h3>Horários de Pico</h3>
+                            <canvas id="hours-chart"></canvas>
+                        </div>
+                        
+                        <div class="chart-container">
+                            <h3>Distribuição Semanal</h3>
+                            <canvas id="weekday-chart"></canvas>
+                        </div>
+                    </div>
+                    
+                    <div class="data-table-container">
+                        <h3>Top Consultas</h3>
+                        <table class="data-table" id="top-queries-table">
+                            <thead>
+                                <tr>
+                                    <th>Consulta</th>
+                                    <th>Contagem</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td colspan="2">Carregando dados...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- Seção: Conteúdo -->
+                <section id="content-section" class="dashboard-section">
+                    <h2>🧠 Análise de Conteúdo</h2>
+                    
+                    <div class="chart-row">
+                        <div class="chart-container pie-chart-container">
+                            <h3>Áreas Mais Consultadas</h3>
+                            <canvas id="areas-chart"></canvas>
+                        </div>
+                        
+                        <div class="chart-container">
+                            <h3>Taxa de Sucesso RAG</h3>
+                            <div class="metric-card highlight full-width">
+                                <div class="metric-title">RAG Success Rate</div>
+                                <div class="metric-value" id="rag-success-rate">--</div>
+                                <div class="metric-subtitle">Consultas sem resultados: <span id="no-results">--</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="data-table-container">
+                        <h3>Equipamentos Mais Consultados</h3>
+                        <table class="data-table" id="top-equipments-table">
+                            <thead>
+                                <tr>
+                                    <th>Código</th>
+                                    <th>Contagem</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td colspan="2">Carregando dados...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- Seção: Performance -->
+                <section id="performance-section" class="dashboard-section">
+                    <h2>⚡ Performance do Sistema</h2>
+                    
+                    <div class="chart-row">
+                        <div class="chart-container pie-chart-container">
+                            <h3>Distribuição de Intents</h3>
+                            <canvas id="intents-chart"></canvas>
+                        </div>
+                        
+                        <div class="chart-container">
+                            <h3>Tamanho Médio de Respostas</h3>
+                            <div class="metric-card highlight full-width">
+                                <div class="metric-title">Caracteres por Resposta</div>
+                                <div class="metric-value" id="avg-response-length">--</div>
+                                <div class="metric-subtitle">Total de respostas: <span id="total-responses">--</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Seção: Engajamento -->
+                <section id="engagement-section" class="dashboard-section">
+                    <h2>👥 Engajamento de Usuários</h2>
+                    
+                    <div class="metrics-grid">
+                        <div class="metric-card">
+                            <div class="metric-title">Power Users</div>
+                            <div class="metric-value" id="power-users">--</div>
+                            <div class="metric-subtitle">≥ 10 interações</div>
+                        </div>
+
+                        <div class="metric-card">
+                            <div class="metric-title">Usuários Regulares</div>
+                            <div class="metric-value" id="regular-users">--</div>
+                            <div class="metric-subtitle">3-9 interações</div>
+                        </div>
+
+                        <div class="metric-card">
+                            <div class="metric-title">Usuários Casuais</div>
+                            <div class="metric-value" id="casual-users">--</div>
+                            <div class="metric-subtitle">< 3 interações</div>
+                        </div>
+
+                        <div class="metric-card highlight">
+                            <div class="metric-title">Taxa de Retenção</div>
+                            <div class="metric-value" id="retention-rate">--</div>
+                            <div class="metric-subtitle">Usuários que retornam</div>
+                        </div>
+                    </div>
+                    
+                    <div class="chart-row">
+                        <div class="chart-container full-width">
+                            <h3>Distribuição de Usuários</h3>
+                            <div style="height: 300px;">
+                                <canvas id="users-distribution-chart"></canvas>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <script src="analytics-FINAL.js"></script>
+    <!-- chart-fix.js não é mais necessário - correções integradas no analytics-FINAL.js -->
+
+</body>
+</html>

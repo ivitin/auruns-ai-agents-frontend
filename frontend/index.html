@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Industrial AI Agent - UNS</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <h1>🤖 Industrial AI Agent</h1>
+                <p>Unified Namespace - Indústria 4.0</p>
+            </div>
+            <div class="header-actions">
+                <span id="username" style="color: white; margin-right: 10px;"></span>
+                <button id="showArchitectureBtn" class="header-btn" title="Ver Arquitetura UNS">
+                    🏗️ Arquitetura
+                </button>
+                <button id="analyticsBtn" class="header-btn" title="Ver Analytics" onclick="window.location.href='analytics.html';">
+                    📊 Analytics
+                </button>
+                <div class="status" id="status">
+                    <span class="status-dot"></span>
+                    <span>Conectando...</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <div class="sidebar-section">
+                    <h3>📊 Áreas</h3>
+                    <div class="area-list" id="areaList">
+                        <button class="area-btn active" data-area="">Todas</button>
+                    </div>
+                </div>
+
+                <div class="sidebar-section">
+                    <h3>📈 Estatísticas</h3>
+                    <div class="stats" id="stats">
+                        <div class="stat-item">
+                            <span class="stat-label">Total:</span>
+                            <span class="stat-value" id="totalEquipments">-</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="sidebar-section">
+                    <h3>💡 Exemplos</h3>
+                    <div class="examples">
+                        <button class="example-btn" data-query="Gere a arquitetura UNS da planta">
+                            🏗️ Arquitetura UNS
+                        </button>
+                        <button class="example-btn" data-query="Quais são as bombas da área GENERAL SERVICES?">
+                            💧 Bombas GENERAL SERVICES
+                        </button>
+                        <button class="example-btn" data-query="Me mostre os robôs de pintura">
+                            🤖 Robôs de Pintura
+                        </button>
+                        <button class="example-btn" data-query="Resumo da área MONTAGEM">
+                            🔧 Resumo MONTAGEM
+                        </button>
+                        <button class="example-btn" data-query="O que é UNS?">
+                            ❓ O que é UNS?
+                        </button>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Chat Area -->
+            <main class="chat-container">
+                <div class="chat-messages" id="chatMessages">
+                    <div class="welcome-message">
+                        <h2>👋 Bem-vindo ao Industrial AI Agent!</h2>
+                        <p>Faça perguntas sobre equipamentos industriais em linguagem natural.</p>
+                        <p><strong>Exemplos:</strong></p>
+                        <ul>
+                            <li>"Gere a arquitetura UNS da planta"</li>
+                            <li>"Quais são as bombas de água?"</li>
+                            <li>"Me mostre os robôs da pintura"</li>
+                            <li>"Informações sobre o equipamento M09400000"</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="chat-input-container">
+                    <form id="chatForm">
+                        <input 
+                            type="text" 
+                            id="messageInput" 
+                            placeholder="Digite sua pergunta sobre equipamentos..." 
+                            autocomplete="off"
+                            required
+                        >
+                        <button type="submit" id="sendBtn">
+                            <span>Enviar</span>
+                            <span class="loading" style="display: none;">⏳</span>
+                        </button>
+                    </form>
+                    <button id="clearBtn" class="clear-btn" title="Limpar conversa">🗑️</button>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Modal de Arquitetura UNS -->
+    <div id="architectureModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>🏗️ Arquitetura UNS - Unified Namespace</h2>
+                <button class="modal-close" id="closeModal">&times;</button>
+            </div>
+            <div class="modal-tabs">
+                <button class="tab-btn active" data-tab="tree">🌲 Árvore</button>
+                <button class="tab-btn" data-tab="summary">📊 Resumo</button>
+                <button class="tab-btn" data-tab="json">💻 JSON</button>
+            </div>
+            <div class="modal-filters">
+                <label>Filtrar por área:</label>
+                <select id="areaFilter">
+                    <option value="">Todas as áreas</option>
+                </select>
+                <button id="loadArchitecture" class="btn-primary">🔄 Carregar</button>
+            </div>
+            <div class="modal-body">
+                <div class="tab-content active" id="treeTab">
+                    <div class="architecture-tree" id="architectureTree">
+                        <div class="loading-spinner">Carregando...</div>
+                    </div>
+                </div>
+                <div class="tab-content" id="summaryTab">
+                    <div class="architecture-summary" id="architectureSummary">
+                        <div class="loading-spinner">Carregando...</div>
+                    </div>
+                </div>
+                <div class="tab-content" id="jsonTab">
+                    <pre class="json-viewer" id="architectureJson">
+                        <code>Carregando...</code>
+                    </pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="scroll-fix.css">
+    <link rel="stylesheet" href="modal-fix.css">
+    <link rel="stylesheet" href="modal-fix-upgrade.css">
+    <script src="script.js"></script>
+    <script src="buttons-fix.js"></script>
+    <script src="scroll-fix.js"></script>]
+    <script src="modal-scroll-fix.js"></script>
+    <script src="feedback-enhance.js"></script>
+
+
+
+</body>
+</html>
+

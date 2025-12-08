@@ -1,0 +1,69 @@
+/* Arquivo: analytics-fix.css */
+/* Adicione este CSS DEPOIS do analytics.css no HTML */
+
+/* FORÇAR ALTURA DOS CANVAS */
+canvas {
+    display: block !important;
+    width: 100% !important;
+    min-height: 250px !important;
+    max-height: 400px !important;
+}
+
+/* Containers de gráficos - garantir altura mínima */
+.chart-container {
+    height: 350px !important;
+    min-height: 350px !important;
+    max-height: 400px !important;
+    position: relative !important;
+    display: block !important;
+}
+
+/* Específico para gráficos de pizza/rosca */
+.pie-chart-container {
+    height: 400px !important;
+    min-height: 400px !important;
+}
+
+.pie-chart-container canvas {
+    height: 350px !important;
+}
+
+/* Container de métrica com gráfico */
+.metric-chart-container {
+    height: 200px !important;
+    min-height: 200px !important;
+    position: relative !important;
+}
+
+.metric-chart-container canvas {
+    height: 180px !important;
+    min-height: 180px !important;
+}
+
+/* Garantir que rows de gráficos tenham altura */
+.chart-row {
+    min-height: 350px !important;
+}
+
+.chart-row .chart-container {
+    height: 350px !important;
+}
+
+/* Forçar visibilidade */
+.dashboard-section.active {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+/* Debug - borda vermelha temporária para ver os containers */
+/* REMOVA DEPOIS DE CONFIRMAR QUE FUNCIONA */
+.chart-container {
+    border: 2px solid red !important;
+    background: #f9f9f9 !important;
+}
+
+canvas {
+    border: 2px solid blue !important;
+    background: white !important;
+}

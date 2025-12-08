@@ -1,0 +1,33 @@
+/* Garante rolagem na visualização da árvore */
+   #architectureTree, 
+   #architectureSummary,
+   #architectureJson code {
+       max-height: none !important;
+       height: auto !important;
+       min-height: 500px;
+   }
+
+   /* Força overflow para o conteúdo */
+   .tab-content {
+       height: auto !important;
+       max-height: 60vh !important;
+       overflow-y: scroll !important;
+   }
+
+   /* Estilos para os conteúdos de árvore e JSON */
+   pre.json-viewer {
+       height: auto !important;
+       white-space: pre-wrap !important;
+   }
+
+   /* Correção para o modal */
+   .modal-content {
+       height: 80vh;
+       overflow: hidden;
+   }
+
+   /* Garante que o corpo do modal possa rolar */
+   .modal-body {
+       overflow-y: auto !important;
+       max-height: calc(80vh - 170px) !important;
+   }
