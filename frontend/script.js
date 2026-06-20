@@ -1,6 +1,54 @@
 const API_URL = 'http://localhost:8000/api/v1';
 let conversationId = null;
 let currentUser = null;
+let selectedArea = null;
+let selectedAssets = [];
+let isSending = false;
+let statsCache = null;
+
+// ── Persistência de conversa (por usuário) ───────────────────────
+let _storedMsgs = [];
+let _isRestoring = false;
+
+function _skConv() { return `chat_conv_${currentUser?.user_id || 'anon'}`; }
+function _skMsgs() { return `chat_msgs_${currentUser?.user_id || 'anon'}`; }
+
+function _persistMsg(text, type, sources, interactionId) {
+    if (_isRestoring) return;
+    _storedMsgs.push({ text, type, sources: sources || null, interactionId: interactionId || null });
+    try { localStorage.setItem(_skMsgs(), JSON.stringify(_storedMsgs)); } catch(e) {}
+}
+
+function _clearStorage() {
+    localStorage.removeItem(_skConv());
+    localStorage.removeItem(_skMsgs());
+    _storedMsgs = [];
+}
+
+function restoreConversation() {
+    const savedId   = localStorage.getItem(_skConv());
+    const savedMsgs = localStorage.getItem(_skMsgs());
+    if (!savedMsgs) return;
+
+    let msgs;
+    try { msgs = JSON.parse(savedMsgs); } catch(_) { _clearStorage(); return; }
+    if (!Array.isArray(msgs) || msgs.length === 0) return;
+
+    if (savedId) conversationId = savedId;
+    _storedMsgs = msgs;
+
+    const welcome = chatMessages.querySelector('.welcome-message');
+    if (welcome) welcome.remove();
+
+    _isRestoring = true;
+    msgs.forEach(m => {
+        try { addMessage(m.text, m.type, m.sources, m.interactionId); }
+        catch(e) { console.error('[restore] addMessage falhou:', e, m); }
+    });
+    _isRestoring = false;
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+// ─────────────────────────────────────────────────────────────────
 
 const chatMessages = document.getElementById('chatMessages');
 const chatForm = document.getElementById('chatForm');
@@ -26,6 +74,8 @@ document.addEventListener('DOMContentLoaded', () => {
     loadStats();
     loadUserStats();
     setupEventListeners();
+    setupAssetListModal();
+    restoreConversation();
 });
 
 function checkAuthentication() {
@@ -41,7 +91,7 @@ function checkAuthentication() {
 function setupEventListeners() {
     chatForm.addEventListener('submit', handleSendMessage);
     clearBtn.addEventListener('click', clearConversation);
-    logoutBtn.addEventListener('click', handleLogout);
+    logoutBtn?.addEventListener('click', handleLogout);
     showArchitectureBtn.addEventListener('click', openArchitectureModal);
     closeModal.addEventListener('click', closeArchitectureModal);
     loadArchitecture.addEventListener('click', loadArchitectureData);
@@ -52,13 +102,6 @@ function setupEventListeners() {
     
     architectureModal.addEventListener('click', (e) => {
         if (e.target === architectureModal) closeArchitectureModal();
-    });
-    
-    document.querySelectorAll('.example-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-            messageInput.value = btn.dataset.query;
-            handleSendMessage(new Event('submit'));
-        });
     });
 }
 
@@ -74,16 +117,19 @@ async function loadUserStats() {
     try {
         const response = await fetch(`${API_URL}/auth/user/${currentUser.user_id}`);
         const data = await response.json();
-        document.getElementById('userInteractions').textContent = data.total_interactions;
-        
-        if (data.common_topics && data.common_topics.length > 0) {
+
+        const interactionsEl = document.getElementById('userInteractions');
+        if (interactionsEl) interactionsEl.textContent = data.total_interactions;
+
+        const userStatsEl = document.getElementById('userStats');
+        if (userStatsEl && data.common_topics && data.common_topics.length > 0) {
             const topicsEl = document.createElement('div');
             topicsEl.className = 'stat-item';
             topicsEl.innerHTML = `
                 <span class="stat-label">Tópicos:</span>
                 <span class="stat-value" style="font-size: 0.75rem;">${data.common_topics.join(', ')}</span>
             `;
-            document.getElementById('userStats').appendChild(topicsEl);
+            userStatsEl.appendChild(topicsEl);
         }
     } catch (error) {
         console.error('Erro ao carregar stats do usuário:', error);
@@ -113,13 +159,21 @@ async function loadAreas() {
             btn.dataset.area = area;
             btn.textContent = area;
             areaList.appendChild(btn);
-            
+
             const option = document.createElement('option');
             option.value = area;
             option.textContent = area;
             areaFilter.appendChild(option);
         });
         areaList.querySelector('.area-btn').classList.add('active');
+
+        areaList.addEventListener('click', (e) => {
+            const btn = e.target.closest('.area-btn');
+            if (!btn) return;
+            areaList.querySelectorAll('.area-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            selectedArea = btn.dataset.area || null;
+        });
     } catch (error) {
         console.error('Erro ao carregar áreas:', error);
     }
@@ -129,7 +183,15 @@ async function loadStats() {
     try {
         const response = await fetch(`${API_URL}/chat/stats`);
         const data = await response.json();
+        statsCache = data;
         document.getElementById('totalEquipments').textContent = data.total_equipments;
+
+        // Dropdown de tipo → distribui por área
+        const tipoSelect = document.getElementById('tipoSelect');
+        if (tipoSelect) {
+            tipoSelect.addEventListener('change', () => updateTipoByArea(tipoSelect.value));
+        }
+
         Object.entries(data.by_area).forEach(([area, count]) => {
             const statItem = document.createElement('div');
             statItem.className = 'stat-item';
@@ -139,22 +201,138 @@ async function loadStats() {
             `;
             statsEl.appendChild(statItem);
         });
+
+        // Preenche selects de filtro de ativos com as mesmas áreas
+        const assetAreaSelect = document.getElementById('assetListArea');
+        if (assetAreaSelect && data.by_area) {
+            Object.keys(data.by_area).forEach(area => {
+                const opt = document.createElement('option');
+                opt.value = area;
+                opt.textContent = area;
+                assetAreaSelect.appendChild(opt);
+            });
+        }
+
+        // Inicializa dropdown de tipo com robôs como default
+        updateTipoByArea('robo');
     } catch (error) {
         console.error('Erro ao carregar estatísticas:', error);
     }
 }
 
+function updateTipoByArea(tipo) {
+    const container = document.getElementById('tipoByAreaStats');
+    if (!container) return;
+    if (!tipo || !statsCache?.by_type_and_area?.[tipo]) {
+        container.innerHTML = '<div class="stat-item"><span class="stat-label" style="font-size:0.75rem">Selecione um tipo acima</span></div>';
+        return;
+    }
+    const byArea = statsCache.by_type_and_area[tipo];
+    const total = Object.values(byArea).reduce((s, v) => s + v, 0);
+    container.innerHTML = `
+        <div class="stat-item" style="font-weight:600;">
+            <span class="stat-label">Total:</span>
+            <span class="stat-value">${total}</span>
+        </div>
+        ${Object.entries(byArea).sort((a, b) => b[1] - a[1]).map(([area, count]) => `
+            <div class="stat-item">
+                <span class="stat-label">${area}:</span>
+                <span class="stat-value">${count}</span>
+            </div>
+        `).join('')}
+    `;
+
+    // Sincroniza o select do dropdown
+    const tipoSelect = document.getElementById('tipoSelect');
+    if (tipoSelect && tipoSelect.value !== tipo) tipoSelect.value = tipo;
+}
+
+function setupAssetListModal() {
+    const listBtn = document.getElementById('listAssetsBtn');
+    const modal = document.getElementById('assetListModal');
+    const closeBtn = document.getElementById('closeAssetListModal');
+
+    if (!listBtn || !modal) return;
+
+    listBtn.addEventListener('click', async () => {
+        const area = document.getElementById('assetListArea').value;
+        const tipo = document.getElementById('assetListType').value;
+        modal.classList.add('active');
+        await loadAssetList(area, tipo);
+    });
+
+    closeBtn.addEventListener('click', () => modal.classList.remove('active'));
+    modal.addEventListener('click', (e) => { if (e.target === modal) modal.classList.remove('active'); });
+}
+
+async function loadAssetList(area, tipo) {
+    const body = document.getElementById('assetListBody');
+    const title = document.getElementById('assetListTitle');
+    body.innerHTML = '<div class="loading-spinner">Carregando...</div>';
+
+    const params = new URLSearchParams();
+    if (area) params.append('area', area);
+    if (tipo) params.append('tipo', tipo);
+
+    const labelArea = area || 'Todas as áreas';
+    const labelTipo = tipo ? `— ${tipo}` : '';
+    title.textContent = `📋 Ativos: ${labelArea} ${labelTipo}`;
+
+    try {
+        const response = await fetch(`${API_URL}/chat/equipment-list?${params}`);
+        const data = await response.json();
+
+        if (!data.equipments || data.equipments.length === 0) {
+            body.innerHTML = '<p style="padding:16px">Nenhum ativo encontrado para os filtros selecionados.</p>';
+            return;
+        }
+
+        const typeIcons = {robo:'🤖', prensa:'🔨', elevador:'⬆️', bomba:'💧', chiller:'❄️', ponte_rolante:'🏗️', mesa:'🪑', outro:'📦'};
+
+        body.innerHTML = `
+            <p style="padding:8px 16px;color:var(--text-secondary);font-size:0.85rem;">Total: <strong>${data.total}</strong> ativos</p>
+            <table style="width:100%;border-collapse:collapse;font-size:0.82rem;">
+                <thead>
+                    <tr style="background:var(--bg-secondary);text-align:left;">
+                        <th style="padding:8px 12px;">Tipo</th>
+                        <th style="padding:8px 12px;">Código</th>
+                        <th style="padding:8px 12px;">Descrição</th>
+                        <th style="padding:8px 12px;">Área</th>
+                        <th style="padding:8px 12px;">UTE / Linha</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    ${data.equipments.map((eq, i) => `
+                        <tr style="border-bottom:1px solid var(--border-color);background:${i % 2 === 0 ? 'transparent' : 'var(--bg-secondary)'};">
+                            <td style="padding:7px 12px;">${typeIcons[eq.tipo] || '📦'} ${eq.tipo}</td>
+                            <td style="padding:7px 12px;font-family:monospace;">${eq.codigo || '—'}</td>
+                            <td style="padding:7px 12px;">${eq.descricao || eq.maquina || '—'}</td>
+                            <td style="padding:7px 12px;">${eq.area || '—'}</td>
+                            <td style="padding:7px 12px;">${[eq.ute, eq.linha].filter(Boolean).join(' / ') || '—'}</td>
+                        </tr>
+                    `).join('')}
+                </tbody>
+            </table>
+        `;
+    } catch (error) {
+        body.innerHTML = '<p style="padding:16px;color:red;">Erro ao carregar ativos.</p>';
+        console.error('Erro ao carregar lista de ativos:', error);
+    }
+}
+
 async function handleSendMessage(e) {
     e.preventDefault();
+    if (isSending) return;
     const message = messageInput.value.trim();
     if (!message) return;
-    
+
+    isSending = true;
     addMessage(message, 'user');
     messageInput.value = '';
     sendBtn.disabled = true;
     sendBtn.querySelector('span:first-child').style.display = 'none';
     sendBtn.querySelector('.loading').style.display = 'inline';
-    
+
     try {
         const response = await fetch(`${API_URL}/chat/message`, {
             method: 'POST',
@@ -162,20 +340,55 @@ async function handleSendMessage(e) {
             body: JSON.stringify({
                 message: message,
                 conversation_id: conversationId,
-                context: {user_id: currentUser.user_id}
+                context: {
+                    user_id: currentUser.user_id,
+                    area: selectedArea,
+                    selected_assets: selectedAssets
+                }
             })
         });
         const data = await response.json();
-        conversationId = data.conversation_id;
-        addMessage(data.response, 'ai', data.sources, data.metadata.interaction_id);
-        loadUserStats();
+        if (!response.ok) {
+            const errMsg = typeof data.detail === 'string' ? data.detail : JSON.stringify(data.detail);
+            console.error('Erro do backend:', errMsg);
+            addMessage(`❌ Erro do servidor: ${errMsg}`, 'ai');
+        } else {
+            conversationId = data.conversation_id;
+            try { localStorage.setItem(_skConv(), conversationId); } catch(_) {}
+            addMessage(data.response, 'ai', data.sources, data.metadata?.interaction_id);
+            loadUserStats();
+        }
     } catch (error) {
-        addMessage('Desculpe, ocorreu um erro ao processar sua mensagem.', 'ai');
+        console.error('Erro ao enviar mensagem:', error);
+        addMessage(`Desculpe, ocorreu um erro: ${error.message}`, 'ai');
     } finally {
+        isSending = false;
         sendBtn.disabled = false;
         sendBtn.querySelector('span:first-child').style.display = 'inline';
         sendBtn.querySelector('.loading').style.display = 'none';
     }
+}
+
+function renderSelectedAssets() {
+    const container = document.getElementById('selectedAssetsChips');
+    if (!container) return;
+    if (selectedAssets.length === 0) {
+        container.style.display = 'none';
+        container.innerHTML = '';
+        return;
+    }
+    container.style.display = 'flex';
+    container.innerHTML = selectedAssets.map((a, i) => `
+        <span style="display:inline-flex;align-items:center;gap:4px;background:var(--primary-color,#2563eb);color:#fff;border-radius:12px;padding:2px 10px;font-size:0.75rem;">
+            📦 ${a.codigo || a.descricao || 'Ativo'}
+            <button onclick="removeSelectedAsset(${i})" style="background:none;border:none;color:#fff;cursor:pointer;font-size:0.9rem;padding:0;line-height:1;">&times;</button>
+        </span>
+    `).join('');
+}
+
+function removeSelectedAsset(index) {
+    selectedAssets.splice(index, 1);
+    renderSelectedAssets();
 }
 
 function parseMarkdown(text) {
@@ -250,11 +463,15 @@ function addMessage(text, type, sources = null, interactionId = null) {
     
     chatMessages.appendChild(messageDiv);
     chatMessages.scrollTop = chatMessages.scrollHeight;
-    
+
     if (interactionId) {
         messageDiv.querySelectorAll('.feedback-btn').forEach(btn => {
             btn.addEventListener('click', () => handleFeedback(btn.dataset.id, btn.dataset.type, btn));
         });
+    }
+
+    if (type === 'user' || type === 'ai') {
+        _persistMsg(text, type, sources, interactionId);
     }
 }
 
@@ -287,9 +504,10 @@ async function handleFeedback(interactionId, feedbackType, button) {
 function clearConversation() {
     if (confirm('Deseja limpar a conversa?')) {
         conversationId = null;
+        _clearStorage();
         chatMessages.innerHTML = `
             <div class="welcome-message">
-                <h2>�� Bem-vindo de volta, ${currentUser.username}!</h2>
+                <h2>👋 Bem-vindo de volta, ${currentUser.username}!</h2>
                 <p>Faça perguntas sobre equipamentos industriais.</p>
             </div>`;
     }

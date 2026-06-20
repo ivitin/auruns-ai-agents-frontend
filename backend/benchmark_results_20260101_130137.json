@@ -1,0 +1,267 @@
+{
+  "timestamp": "2026-01-01T13:01:14.537416",
+  "dataset_statistics": {
+    "total_equipments": 1418,
+    "by_area": {
+      "GENERAL SERVICES": 518,
+      "PINTURA": 287,
+      "MONTAGEM": 613
+    },
+    "hierarchy_coverage": {
+      "with_ute": 1418,
+      "with_linha": 1418,
+      "with_estacao": 1082,
+      "with_codigo": 1418,
+      "complete_hierarchy": 1418,
+      "completeness_rate": 100.0
+    }
+  },
+  "rag_metrics": {
+    "total_queries_tested": 12,
+    "success_rate": 0.0,
+    "avg_retrieval_time_ms": 0.0,
+    "avg_results_per_query": 0.0,
+    "query_results": [
+      {
+        "query": "Quais são os robôs de solda na funilaria?",
+        "num_retrieved": 0,
+        "has_results": false,
+        "retrieval_time_ms": 0.01,
+        "top_result": null
+      },
+      {
+        "query": "Mostre equipamentos de resfriamento",
+        "num_retrieved": 0,
+        "has_results": false,
+        "retrieval_time_ms": 0.0,
+        "top_result": null
+      },
+      {
+        "query": "Encontre prensas Schuler",
+        "num_retrieved": 0,
+        "has_results": false,
+        "retrieval_time_ms": 0.0,
+        "top_result": null
+      },
+      {
+        "query": "Robôs de pintura no paint shop",
+        "num_retrieved": 0,
+        "has_results": false,
+        "retrieval_time_ms": 0.0,
+        "top_result": null
+      },
+      {
+        "query": "Elevadores na área de montagem",
+        "num_retrieved": 0,
+        "has_results": false,
+        "retrieval_time_ms": 0.0,
+        "top_result": null
+      },
+      {
+        "query": "Equipamentos da UTE Body Shop Line 1",
+        "num_retrieved": 0,
+        "has_results": false,
+        "retrieval_time_ms": 0.0,
+        "top_result": null
+      },
+      {
+        "query": "O que tem na linha de pintura?",
+        "num_retrieved": 0,
+        "has_results": false,
+        "retrieval_time_ms": 0.0,
+        "top_result": null
+      },
+      {
+        "query": "Mostre equipamentos da estação de solda",
+        "num_retrieved": 0,
+        "has_results": false,
+        "retrieval_time_ms": 0.0,
+        "top_result": null
+      },
+      {
+        "query": "O que é o equipamento M09400000?",
+        "num_retrieved": 0,
+        "has_results": false,
+        "retrieval_time_ms": 0.0,
+        "top_result": null
+      },
+      {
+        "query": "Descreva o sistema de resfriamento",
+        "num_retrieved": 0,
+        "has_results": false,
+        "retrieval_time_ms": 0.0,
+        "top_result": null
+      },
+      {
+        "query": "Quantas áreas de produção existem?",
+        "num_retrieved": 0,
+        "has_results": false,
+        "retrieval_time_ms": 0.0,
+        "top_result": null
+      },
+      {
+        "query": "Mostre a estrutura hierárquica da funilaria",
+        "num_retrieved": 0,
+        "has_results": false,
+        "retrieval_time_ms": 0.0,
+        "top_result": null
+      }
+    ]
+  },
+  "system_performance": {
+    "iterations": 20,
+    "vector_search": {
+      "avg_ms": 0.0,
+      "min_ms": 0.0,
+      "max_ms": 0.0
+    },
+    "embedding_generation": {
+      "avg_ms": 108.4,
+      "min_ms": 71.99,
+      "max_ms": 471.17
+    }
+  },
+  "llm_judge": {
+    "total_evaluations": 8,
+    "average_scores": {
+      "relevance": 5.0,
+      "technical_accuracy": 5.0,
+      "completeness": 4.125,
+      "grounding": 5.0,
+      "clarity": 5.0,
+      "faithfulness": 5.0,
+      "overall_score": 4.80875
+    },
+    "detailed_results": [
+      {
+        "query": "Quais são os robôs de solda na funilaria?",
+        "response": "Na funilaria temos o robô de solda M09400123 de 6 eixos na Body Shop Line 1.",
+        "evaluation": {
+          "relevance": 5,
+          "technical_accuracy": 5,
+          "completeness": 5,
+          "grounding": 5,
+          "clarity": 5,
+          "faithfulness": 5,
+          "overall_score": 5,
+          "justification": "A resposta está perfeitamente alinhada com a pergunta e o contexto fornecido, apresentando informações precisas e completas.",
+          "strengths": "Resposta clara, precisa e bem fundamentada, utilizando corretamente as informações do contexto.",
+          "weaknesses": "Nenhum ponto fraco identificado."
+        }
+      },
+      {
+        "query": "Equipamentos de prensa",
+        "response": "Encontrei a prensa hidráulica M09401567 de 500 toneladas no Press Shop.",
+        "evaluation": {
+          "relevance": 5,
+          "technical_accuracy": 5,
+          "completeness": 5,
+          "grounding": 5,
+          "clarity": 5,
+          "faithfulness": 5,
+          "overall_score": 5,
+          "justification": "A resposta está perfeitamente alinhada com a pergunta e o contexto fornecido, apresentando informações precisas e completas.",
+          "strengths": "Relevância, precisão técnica, completude, fundamentação e clareza.",
+          "weaknesses": "Nenhum ponto fraco identificado."
+        }
+      },
+      {
+        "query": "Robô de pintura principal",
+        "response": "O robô de pintura principal é o M08700012 da ABB na Paint Shop Line 1.",
+        "evaluation": {
+          "relevance": 5,
+          "technical_accuracy": 5,
+          "completeness": 5,
+          "grounding": 5,
+          "clarity": 5,
+          "faithfulness": 5,
+          "overall_score": 5,
+          "justification": "A resposta está perfeitamente alinhada com a query do usuário e o contexto recuperado.",
+          "strengths": "Resposta clara, precisa e fiel ao contexto.",
+          "weaknesses": "Nenhum ponto fraco identificado."
+        }
+      },
+      {
+        "query": "Sistema de cura",
+        "response": "O sistema de cura usa o forno M08701234 com infravermelho a 180°C.",
+        "evaluation": {
+          "relevance": 5,
+          "technical_accuracy": 5,
+          "completeness": 5,
+          "grounding": 5,
+          "clarity": 5,
+          "faithfulness": 5,
+          "overall_score": 5,
+          "justification": "A resposta está perfeitamente alinhada com a pergunta e o contexto fornecido, demonstrando total compreensão do sistema de cura.",
+          "strengths": "Relevância, precisão técnica, completude, fundamentação e clareza.",
+          "weaknesses": "Nenhum ponto fraco identificado."
+        }
+      },
+      {
+        "query": "Estação de montagem do motor",
+        "response": "A estação de montagem do motor é a M11200345 no Engine Assembly.",
+        "evaluation": {
+          "relevance": 5,
+          "technical_accuracy": 5,
+          "completeness": 3,
+          "grounding": 5,
+          "clarity": 5,
+          "faithfulness": 5,
+          "overall_score": 4.5,
+          "justification": "A resposta é precisa e clara, diretamente relacionada à pergunta do usuário, utilizando informações do contexto de forma fiel.",
+          "strengths": "Precisão técnica, clareza e fidelidade ao contexto",
+          "weaknesses": "Completude parcial, pois poderia incluir mais detalhes sobre a estação de montagem"
+        }
+      },
+      {
+        "query": "Sistema de parafusadeiras",
+        "response": "O sistema de parafusadeiras é o M11201678 com controle de torque.",
+        "evaluation": {
+          "relevance": 5,
+          "technical_accuracy": 5,
+          "completeness": 4,
+          "grounding": 5,
+          "clarity": 5,
+          "faithfulness": 5,
+          "overall_score": 4.8,
+          "justification": "A resposta está diretamente relacionada à pergunta e fornece informações precisas e claras sobre o sistema de parafusadeiras.",
+          "strengths": "Relevância, precisão técnica, clareza e fundamentação sólida.",
+          "weaknesses": "Pode ser considerada parcialmente completa, pois não fornece detalhes adicionais sobre o funcionamento ou especificações do sistema."
+        }
+      },
+      {
+        "query": "Equipamento de resfriamento",
+        "response": "O chiller M10500045 tem capacidade de 500 TR.",
+        "evaluation": {
+          "relevance": 5,
+          "technical_accuracy": 5,
+          "completeness": 3,
+          "grounding": 5,
+          "clarity": 5,
+          "faithfulness": 5,
+          "overall_score": 4.5,
+          "justification": "A resposta é precisa e relevante, diretamente relacionada ao contexto fornecido.",
+          "strengths": "Precisão técnica, clareza e fiel ao contexto",
+          "weaknesses": "Pode ser considerada parcialmente completa, pois não fornece informações adicionais sobre o equipamento"
+        }
+      },
+      {
+        "query": "Compressor de ar",
+        "response": "O compressor M10501234 tem 200 HP de potência.",
+        "evaluation": {
+          "relevance": 5,
+          "technical_accuracy": 5,
+          "completeness": 3,
+          "grounding": 5,
+          "clarity": 5,
+          "faithfulness": 5,
+          "overall_score": 4.67,
+          "justification": "A resposta é precisa e relevante, diretamente relacionada à pergunta sobre o compressor de ar.",
+          "strengths": "Precisão técnica, clareza e fiel ao contexto",
+          "weaknesses": "Pode ser considerada parcialmente completa, pois não fornece informações adicionais sobre o compressor"
+        }
+      }
+    ]
+  },
+  "total_execution_time": 22.52
+}

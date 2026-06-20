@@ -83,6 +83,134 @@ document.addEventListener('DOMContentLoaded', () => {
         };
     }
     
+    // 6. Botão "Ver Lista" de ativos
+    const listAssetsBtn = document.getElementById('listAssetsBtn');
+    const assetListModal = document.getElementById('assetListModal');
+    const closeAssetListModal = document.getElementById('closeAssetListModal');
+
+    function fecharAssetModal() {
+        if (!assetListModal) return;
+        assetListModal.classList.remove('active');
+        assetListModal.style.display = 'none';
+    }
+
+    if (listAssetsBtn && assetListModal) {
+        listAssetsBtn.onclick = async function () {
+            const area = document.getElementById('assetListArea')?.value || '';
+            const tipo = document.getElementById('assetListType')?.value || '';
+
+            // Força exibição do modal independente de CSS
+            assetListModal.classList.add('active');
+            assetListModal.style.cssText = 'display:flex!important;align-items:center;justify-content:center;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);z-index:9999;';
+
+            const bodyEl = document.getElementById('assetListBody');
+            const titleEl = document.getElementById('assetListTitle');
+            if (titleEl) titleEl.textContent = `📋 Ativos: ${area || 'Todas'} ${tipo ? '— ' + tipo : ''}`;
+            if (bodyEl) bodyEl.innerHTML = '<div style="padding:20px;text-align:center;">⏳ Carregando...</div>';
+
+            try {
+                const base = (typeof API_URL !== 'undefined') ? API_URL : 'http://localhost:8000/api/v1';
+                const params = new URLSearchParams();
+                if (area) params.append('area', area);
+                if (tipo) params.append('tipo', tipo);
+
+                const resp = await fetch(`${base}/chat/equipment-list?${params}`);
+                if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+                const data = await resp.json();
+
+                if (!bodyEl) return;
+                if (!data.equipments || data.equipments.length === 0) {
+                    bodyEl.innerHTML = '<p style="padding:16px">Nenhum ativo encontrado.</p>';
+                    return;
+                }
+
+                const icons = {robo:'🤖',prensa:'🔨',elevador:'⬆️',bomba:'💧',chiller:'❄️',ponte_rolante:'🏗️',mesa:'🪑',outro:'📦'};
+                // Rastreia seleção local no modal
+                const modalSelected = new Map(); // codigo → asset obj
+
+                function renderModalFooter() {
+                    let footer = document.getElementById('assetModalFooter');
+                    if (!footer) {
+                        footer = document.createElement('div');
+                        footer.id = 'assetModalFooter';
+                        footer.style.cssText = 'position:sticky;bottom:0;padding:10px 16px;background:#fff;border-top:1px solid #e2e8f0;display:flex;align-items:center;justify-content:space-between;';
+                        bodyEl.parentElement.appendChild(footer);
+                    }
+                    const count = modalSelected.size;
+                    footer.innerHTML = count === 0
+                        ? '<span style="font-size:.8rem;color:#64748b">Clique em uma linha para selecioná-la como contexto</span>'
+                        : `<span style="font-size:.85rem"><strong>${count}</strong> ativo(s) selecionado(s)</span>
+                           <button id="addAssetsCtxBtn" style="background:#2563eb;color:#fff;border:none;border-radius:6px;padding:6px 14px;cursor:pointer;font-size:.85rem;">
+                               ✅ Usar como contexto
+                           </button>`;
+                    const btn = document.getElementById('addAssetsCtxBtn');
+                    if (btn) btn.onclick = () => {
+                        if (typeof selectedAssets !== 'undefined') {
+                            modalSelected.forEach(asset => {
+                                if (!selectedAssets.find(a => a.codigo === asset.codigo)) {
+                                    selectedAssets.push(asset);
+                                }
+                            });
+                            if (typeof renderSelectedAssets === 'function') renderSelectedAssets();
+                        }
+                        fecharAssetModal();
+                    };
+                }
+
+                function toggleRow(tr, eq) {
+                    const key = eq.codigo || eq.descricao;
+                    if (modalSelected.has(key)) {
+                        modalSelected.delete(key);
+                        tr.style.background = tr.dataset.origBg || '';
+                        tr.style.outline = '';
+                    } else {
+                        modalSelected.set(key, eq);
+                        tr.style.background = '#dbeafe';
+                        tr.style.outline = '2px solid #2563eb';
+                    }
+                    renderModalFooter();
+                }
+
+                bodyEl.innerHTML = `
+                    <p style="padding:8px 16px;font-size:.85rem;">Total: <strong>${data.total}</strong> ativos</p>
+                    <div style="overflow-x:auto;">
+                    <table style="width:100%;border-collapse:collapse;font-size:.82rem;">
+                        <thead><tr style="background:#f1f5f9;text-align:left;">
+                            <th style="padding:8px 12px;">Tipo</th>
+                            <th style="padding:8px 12px;">Código</th>
+                            <th style="padding:8px 12px;">Descrição</th>
+                            <th style="padding:8px 12px;">Área</th>
+                            <th style="padding:8px 12px;">UTE / Linha</th>
+                        </tr></thead>
+                        <tbody>${data.equipments.map((eq, i) => `
+                            <tr data-idx="${i}" data-orig="${i%2===0?'transparent':'#f8fafc'}"
+                                style="border-bottom:1px solid #e2e8f0;background:${i%2===0?'transparent':'#f8fafc'};cursor:pointer;"
+                                title="Clique para selecionar como contexto">
+                                <td style="padding:7px 12px;">${icons[eq.tipo]||'📦'} ${eq.tipo}</td>
+                                <td style="padding:7px 12px;font-family:monospace;">${eq.codigo||'—'}</td>
+                                <td style="padding:7px 12px;">${eq.descricao||eq.maquina||'—'}</td>
+                                <td style="padding:7px 12px;">${eq.area||'—'}</td>
+                                <td style="padding:7px 12px;">${[eq.ute,eq.linha].filter(Boolean).join(' / ')||'—'}</td>
+                            </tr>`).join('')}
+                        </tbody>
+                    </table></div>`;
+
+                // Bind click em cada linha
+                bodyEl.querySelectorAll('tbody tr').forEach((tr, i) => {
+                    tr.dataset.origBg = data.equipments[i] && i%2===0 ? 'transparent' : '#f8fafc';
+                    tr.onclick = () => toggleRow(tr, data.equipments[i]);
+                });
+                renderModalFooter();
+            } catch (err) {
+                if (bodyEl) bodyEl.innerHTML = `<p style="padding:16px;color:red;">❌ Erro: ${err.message}</p>`;
+                console.error('Erro lista de ativos:', err);
+            }
+        };
+
+        if (closeAssetListModal) closeAssetListModal.onclick = fecharAssetModal;
+        assetListModal.addEventListener('click', (e) => { if (e.target === assetListModal) fecharAssetModal(); });
+    }
+
     console.log('✅ Todos os botões corrigidos!');
 });
 

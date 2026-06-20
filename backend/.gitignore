@@ -1,0 +1,36 @@
+# Python venv
+venv/
+.venv/
+env/
+
+# Cache
+__pycache__/
+*.pyc
+
+# Logs
+*.log
+logs/
+
+# Dados pesados
+*.bin
+*.ckpt
+*.pt
+*.h5
+*.safetensors
+
+# Credenciais e variáveis de ambiente
+.env
+.env.*
+!.env.example
+credentials.json
+
+# ChromaDB / dados vetoriais
+chroma_db/
+
+# IDE
+.vscode/
+.idea/
+
+# Build
+dist/
+build/

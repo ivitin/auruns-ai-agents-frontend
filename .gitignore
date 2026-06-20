@@ -1,0 +1,45 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# Virtual environments
+venv/
+.venv/
+env/
+ENV/
+
+# Credenciais e variáveis de ambiente
+.env
+.env.*
+!.env.example
+credentials.json
+
+# ChromaDB / dados vetoriais
+chroma_db/
+
+# Modelos e pesos pesados
+*.bin
+*.ckpt
+*.pt
+*.h5
+*.safetensors
+
+# Logs
+*.log
+logs/
+
+# IDE
+.vscode/
+.idea/
+
+# Build
+dist/
+build/
+*.egg-info/
+
+# OS
+.DS_Store
+Thumbs.db

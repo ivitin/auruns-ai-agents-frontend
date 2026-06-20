@@ -1,0 +1,375 @@
+{
+  "timestamp": "2026-01-01T13:11:39.425495",
+  "dataset_statistics": {
+    "total_equipments": 1418,
+    "by_area": {
+      "GENERAL SERVICES": 518,
+      "PINTURA": 287,
+      "MONTAGEM": 613
+    },
+    "hierarchy_coverage": {
+      "with_ute": 1418,
+      "with_linha": 1418,
+      "with_estacao": 1082,
+      "with_codigo": 1418,
+      "complete_hierarchy": 1418,
+      "completeness_rate": 100.0
+    }
+  },
+  "rag_metrics": {
+    "total_queries_tested": 12,
+    "success_rate": 100.0,
+    "avg_retrieval_time_ms": 129.73,
+    "avg_results_per_query": 5.0,
+    "query_results": [
+      {
+        "query": "Quais são os robôs de solda na funilaria?",
+        "num_retrieved": 5,
+        "has_results": true,
+        "retrieval_time_ms": 357.07,
+        "top_result": {
+          "content": "Área: MONTAGEM\nUTE: UTE 3\nLinha: GLAZING\nEstação: CÉLULA PARABRISA\nMáquina: BOMBA DE ENGRENAGEM  PARABRISA\nCódigo: M09313009\nDescrição: BOMBA DE ENGRENAGEM  PARABRISA",
+          "metadata": {
+            "codigo": "M09313009",
+            "linha": "GLAZING",
+            "tipo": "",
+            "area": "MONTAGEM",
+            "ute": "UTE 3"
+          }
+        }
+      },
+      {
+        "query": "Mostre equipamentos de resfriamento",
+        "num_retrieved": 5,
+        "has_results": true,
+        "retrieval_time_ms": 99.57,
+        "top_result": {
+          "content": "Área: PINTURA\nUTE: UTE 3\nLinha: TC-TOP COAT\nMáquina: FLASH OFF\nCódigo: -\nDescrição: M09210270          AQUECEDOR FLASH OFF",
+          "metadata": {
+            "linha": "TC-TOP COAT",
+            "tipo": "",
+            "codigo": "-",
+            "ute": "UTE 3",
+            "area": "PINTURA"
+          }
+        }
+      },
+      {
+        "query": "Encontre prensas Schuler",
+        "num_retrieved": 5,
+        "has_results": true,
+        "retrieval_time_ms": 122.18,
+        "top_result": {
+          "content": "Área: MONTAGEM\nUTE: UTE 3\nLinha: GLAZING\nEstação: GRAVAÇÃO DE CHASSIS BACKUP\nMáquina: CABEÇOTE DE GRAVAÇÃO DE CHASSIS\nCódigo: M09313004\nDescrição: CABEÇOTE DE GRAVAÇÃO DE CHASSIS",
+          "metadata": {
+            "ute": "UTE 3",
+            "linha": "GLAZING",
+            "codigo": "M09313004",
+            "area": "MONTAGEM",
+            "tipo": ""
+          }
+        }
+      },
+      {
+        "query": "Robôs de pintura no paint shop",
+        "num_retrieved": 5,
+        "has_results": true,
+        "retrieval_time_ms": 107.47,
+        "top_result": {
+          "content": "Área: PINTURA\nUTE: UTE 3\nLinha: PMR-CENTRAL DE TINTAS\nMáquina: PMR-Gr solv preparo CC\nCódigo: -\nDescrição: M09203767          Sistema de condicionamento de tintas",
+          "metadata": {
+            "area": "PINTURA",
+            "codigo": "-",
+            "linha": "PMR-CENTRAL DE TINTAS",
+            "ute": "UTE 3",
+            "tipo": ""
+          }
+        }
+      },
+      {
+        "query": "Elevadores na área de montagem",
+        "num_retrieved": 5,
+        "has_results": true,
+        "retrieval_time_ms": 106.37,
+        "top_result": {
+          "content": "Área: MONTAGEM\nUTE: UTE 3\nLinha: GLAZING\nEstação: ELEVADORES\nMáquina: CH2ZNE05TQ01  ELEVADOR\nCódigo: M09311165\nDescrição: CH2ZNE05TQ01  ELEVADOR",
+          "metadata": {
+            "area": "MONTAGEM",
+            "ute": "UTE 3",
+            "tipo": "",
+            "linha": "GLAZING",
+            "codigo": "M09311165"
+          }
+        }
+      },
+      {
+        "query": "Equipamentos da UTE Body Shop Line 1",
+        "num_retrieved": 5,
+        "has_results": true,
+        "retrieval_time_ms": 95.25,
+        "top_result": {
+          "content": "Área: PINTURA\nUTE: UTE 3\nLinha: TC-TOP COAT\nMáquina: RM30-Grupo EMU\nCódigo: 440L92030\nDescrição: BC1 Externo",
+          "metadata": {
+            "tipo": "",
+            "ute": "UTE 3",
+            "codigo": "440L92030",
+            "area": "PINTURA",
+            "linha": "TC-TOP COAT"
+          }
+        }
+      },
+      {
+        "query": "O que tem na linha de pintura?",
+        "num_retrieved": 5,
+        "has_results": true,
+        "retrieval_time_ms": 92.21,
+        "top_result": {
+          "content": "Área: PINTURA\nUTE: UTE 2\nLinha: SO-FORNO DA SIGILATURA\nMáquina: Forno da Sigilatura\nCódigo: M09201098\nDescrição: Forno da Sigilatura",
+          "metadata": {
+            "tipo": "",
+            "linha": "SO-FORNO DA SIGILATURA",
+            "area": "PINTURA",
+            "ute": "UTE 2",
+            "codigo": "M09201098"
+          }
+        }
+      },
+      {
+        "query": "Mostre equipamentos da estação de solda",
+        "num_retrieved": 5,
+        "has_results": true,
+        "retrieval_time_ms": 101.88,
+        "top_result": {
+          "content": "Área: MONTAGEM\nUTE: UTE 3\nLinha: GLAZING\nEstação: CÉLULA LUNOTO\nMáquina: REBATEDOR  LUNOTO\nCódigo: M09313018\nDescrição: REBATEDOR  LUNOTO",
+          "metadata": {
+            "codigo": "M09313018",
+            "linha": "GLAZING",
+            "tipo": "",
+            "area": "MONTAGEM",
+            "ute": "UTE 3"
+          }
+        }
+      },
+      {
+        "query": "O que é o equipamento M09400000?",
+        "num_retrieved": 5,
+        "has_results": true,
+        "retrieval_time_ms": 138.83,
+        "top_result": {
+          "content": "Área: MONTAGEM\nUTE: UTE 5\nLinha: FINAL\nEstação: TRANSFERENCIAS\nMáquina: FLZNE06SPT01  EMPURRADOR SX  SLN01\nCódigo: M09336220\nDescrição: FLZNE06SPT01  EMPURRADOR SX  SLN01",
+          "metadata": {
+            "ute": "UTE 5",
+            "codigo": "M09336220",
+            "area": "MONTAGEM",
+            "linha": "FINAL",
+            "tipo": ""
+          }
+        }
+      },
+      {
+        "query": "Descreva o sistema de resfriamento",
+        "num_retrieved": 5,
+        "has_results": true,
+        "retrieval_time_ms": 108.65,
+        "top_result": {
+          "content": "Área: PINTURA\nUTE: UTE 1\nLinha: PT-PRE TRATAMENTO\nMáquina: BOILER-Aquecimento de agua\nCódigo: 040L92080\nDescrição: BOILER-Aquecimento de agua",
+          "metadata": {
+            "linha": "PT-PRE TRATAMENTO",
+            "tipo": "",
+            "area": "PINTURA",
+            "codigo": "040L92080",
+            "ute": "UTE 1"
+          }
+        }
+      },
+      {
+        "query": "Quantas áreas de produção existem?",
+        "num_retrieved": 5,
+        "has_results": true,
+        "retrieval_time_ms": 97.95,
+        "top_result": {
+          "content": "Área: GENERAL SERVICES\nUTE: UTE 1-AGUA DE RESFRIAMENTO\nLinha: DISTRIBUIÇÃO\nEstação: FUNILARIA\nMáquina: TROCADOR DE CALOR - 01\nCódigo: M09555137\nDescrição: TROCADOR DE CALOR - 01",
+          "metadata": {
+            "linha": "DISTRIBUIÇÃO",
+            "ute": "UTE 1-AGUA DE RESFRIAMENTO",
+            "codigo": "M09555137",
+            "tipo": "",
+            "area": "GENERAL SERVICES"
+          }
+        }
+      },
+      {
+        "query": "Mostre a estrutura hierárquica da funilaria",
+        "num_retrieved": 5,
+        "has_results": true,
+        "retrieval_time_ms": 129.36,
+        "top_result": {
+          "content": "Área: MONTAGEM\nUTE: UTE 3\nLinha: GLAZING\nEstação: CÉLULA PARABRISA\nMáquina: BOMBA DE GURIT A  PARABRISA\nCódigo: M09313011\nDescrição: BOMBA DE GURIT A  PARABRISA",
+          "metadata": {
+            "tipo": "",
+            "ute": "UTE 3",
+            "codigo": "M09313011",
+            "area": "MONTAGEM",
+            "linha": "GLAZING"
+          }
+        }
+      }
+    ]
+  },
+  "system_performance": {
+    "iterations": 20,
+    "vector_search": {
+      "avg_ms": 101.34,
+      "min_ms": 81.14,
+      "max_ms": 137.84
+    },
+    "embedding_generation": {
+      "avg_ms": 108.89,
+      "min_ms": 87.43,
+      "max_ms": 137.99
+    }
+  },
+  "llm_judge": {
+    "total_evaluations": 8,
+    "average_scores": {
+      "relevance": 5.0,
+      "technical_accuracy": 5.0,
+      "completeness": 4.125,
+      "grounding": 5.0,
+      "clarity": 5.0,
+      "faithfulness": 5.0,
+      "overall_score": 4.80875
+    },
+    "detailed_results": [
+      {
+        "query": "Quais são os robôs de solda na funilaria?",
+        "response": "Na funilaria temos o robô de solda M09400123 de 6 eixos na Body Shop Line 1.",
+        "evaluation": {
+          "relevance": 5,
+          "technical_accuracy": 5,
+          "completeness": 5,
+          "grounding": 5,
+          "clarity": 5,
+          "faithfulness": 5,
+          "overall_score": 5,
+          "justification": "A resposta está perfeitamente alinhada com a pergunta e o contexto fornecido, apresentando informações precisas e completas.",
+          "strengths": "Relevância, precisão técnica, completude, fundamentação, clareza e fidelidade ao contexto.",
+          "weaknesses": "Nenhum ponto fraco identificado."
+        }
+      },
+      {
+        "query": "Equipamentos de prensa",
+        "response": "Encontrei a prensa hidráulica M09401567 de 500 toneladas no Press Shop.",
+        "evaluation": {
+          "relevance": 5,
+          "technical_accuracy": 5,
+          "completeness": 5,
+          "grounding": 5,
+          "clarity": 5,
+          "faithfulness": 5,
+          "overall_score": 5,
+          "justification": "A resposta está perfeitamente alinhada com a query do usuário e o contexto recuperado.",
+          "strengths": "Resposta clara, precisa e completa, que atende à pergunta do usuário de forma eficaz.",
+          "weaknesses": "Nenhum ponto fraco identificado."
+        }
+      },
+      {
+        "query": "Robô de pintura principal",
+        "response": "O robô de pintura principal é o M08700012 da ABB na Paint Shop Line 1.",
+        "evaluation": {
+          "relevance": 5,
+          "technical_accuracy": 5,
+          "completeness": 5,
+          "grounding": 5,
+          "clarity": 5,
+          "faithfulness": 5,
+          "overall_score": 5,
+          "justification": "A resposta está perfeitamente alinhada com a query do usuário e o contexto recuperado.",
+          "strengths": "Relevância, precisão técnica, completude, fundamentação e clareza.",
+          "weaknesses": "Nenhum ponto fraco identificado."
+        }
+      },
+      {
+        "query": "Sistema de cura",
+        "response": "O sistema de cura usa o forno M08701234 com infravermelho a 180°C.",
+        "evaluation": {
+          "relevance": 5,
+          "technical_accuracy": 5,
+          "completeness": 5,
+          "grounding": 5,
+          "clarity": 5,
+          "faithfulness": 5,
+          "overall_score": 5,
+          "justification": "A resposta está perfeitamente alinhada com a pergunta e o contexto fornecido, demonstrando total compreensão do sistema de cura.",
+          "strengths": "Relevância, precisão técnica, completude, fundamentação e clareza.",
+          "weaknesses": "Nenhum ponto fraco identificado."
+        }
+      },
+      {
+        "query": "Estação de montagem do motor",
+        "response": "A estação de montagem do motor é a M11200345 no Engine Assembly.",
+        "evaluation": {
+          "relevance": 5,
+          "technical_accuracy": 5,
+          "completeness": 3,
+          "grounding": 5,
+          "clarity": 5,
+          "faithfulness": 5,
+          "overall_score": 4.5,
+          "justification": "A resposta é precisa e clara, diretamente relacionada à pergunta do usuário, utilizando informações do contexto de forma fiel.",
+          "strengths": "Relevância, precisão técnica, clareza e fidelidade ao contexto",
+          "weaknesses": "Completude, pois poderia incluir mais detalhes sobre a estação de montagem"
+        }
+      },
+      {
+        "query": "Sistema de parafusadeiras",
+        "response": "O sistema de parafusadeiras é o M11201678 com controle de torque.",
+        "evaluation": {
+          "relevance": 5,
+          "technical_accuracy": 5,
+          "completeness": 4,
+          "grounding": 5,
+          "clarity": 5,
+          "faithfulness": 5,
+          "overall_score": 4.8,
+          "justification": "A resposta está diretamente relacionada à pergunta e apresenta informações precisas e claras sobre o sistema de parafusadeiras.",
+          "strengths": "Relevância, precisão técnica, clareza e fundamentação sólida.",
+          "weaknesses": "Pode ser considerada parcialmente completa, pois não fornece detalhes adicionais sobre o funcionamento ou especificações do sistema."
+        }
+      },
+      {
+        "query": "Equipamento de resfriamento",
+        "response": "O chiller M10500045 tem capacidade de 500 TR.",
+        "evaluation": {
+          "relevance": 5,
+          "technical_accuracy": 5,
+          "completeness": 3,
+          "grounding": 5,
+          "clarity": 5,
+          "faithfulness": 5,
+          "overall_score": 4.67,
+          "justification": "A resposta está diretamente relacionada à pergunta e é tecnicamente correta, utilizando informações do contexto de forma fiel.",
+          "strengths": "Relevância, precisão técnica, clareza e fundamentação",
+          "weaknesses": "Completude, pois a resposta poderia incluir mais detalhes sobre o equipamento de resfriamento."
+        }
+      },
+      {
+        "query": "Compressor de ar",
+        "response": "O compressor M10501234 tem 200 HP de potência.",
+        "evaluation": {
+          "relevance": 5,
+          "technical_accuracy": 5,
+          "completeness": 3,
+          "grounding": 5,
+          "clarity": 5,
+          "faithfulness": 5,
+          "overall_score": 4.5,
+          "justification": "A resposta está diretamente relacionada à pergunta e é tecnicamente correta, utilizando informações do contexto de forma fiel.",
+          "strengths": "Relevância, precisão técnica, clareza e fundamentação",
+          "weaknesses": "Completude, pois a resposta poderia incluir mais detalhes sobre o compressor."
+        }
+      }
+    ]
+  },
+  "total_execution_time": 21.2
+}

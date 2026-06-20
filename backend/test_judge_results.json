@@ -1,0 +1,109 @@
+{
+  "metadata": {
+    "judge_model": "llama-3.3-70b-versatile",
+    "num_test_cases": 3,
+    "evaluation_date": "2026-01-01 12:50:41"
+  },
+  "aggregate_metrics": {
+    "num_evaluations": 3,
+    "average_scores": {
+      "relevance": 5.0,
+      "technical_accuracy": 5.0,
+      "completeness": 3.67,
+      "grounding": 5.0,
+      "clarity": 5.0,
+      "faithfulness": 5.0,
+      "overall_score": 4.67
+    },
+    "score_distribution": {
+      "excellent (4.5-5.0)": 3,
+      "good (3.5-4.4)": 0,
+      "fair (2.5-3.4)": 0,
+      "poor (1.5-2.4)": 0,
+      "very_poor (1.0-1.4)": 0
+    },
+    "score_distribution_percentage": {
+      "excellent (4.5-5.0)": 100.0,
+      "good (3.5-4.4)": 0.0,
+      "fair (2.5-3.4)": 0.0,
+      "poor (1.5-2.4)": 0.0,
+      "very_poor (1.0-1.4)": 0.0
+    },
+    "criteria_ranking": [
+      [
+        "relevance",
+        5.0
+      ],
+      [
+        "technical_accuracy",
+        5.0
+      ],
+      [
+        "grounding",
+        5.0
+      ],
+      [
+        "clarity",
+        5.0
+      ],
+      [
+        "faithfulness",
+        5.0
+      ],
+      [
+        "completeness",
+        3.67
+      ]
+    ]
+  },
+  "detailed_evaluations": [
+    {
+      "query": "Quais são os robôs de solda na funilaria?",
+      "response": "Na funilaria temos o robô M09400123 de 6 eixos.",
+      "evaluation": {
+        "relevance": 5,
+        "technical_accuracy": 5,
+        "completeness": 3,
+        "grounding": 5,
+        "clarity": 5,
+        "faithfulness": 5,
+        "overall_score": 4.5,
+        "justification": "A resposta é precisa e clara, diretamente relacionada à pergunta do usuário.",
+        "strengths": "Relevância, precisão técnica, clareza e fundamentação.",
+        "weaknesses": "Completude, pois poderia incluir mais detalhes sobre o robô de solda."
+      }
+    },
+    {
+      "query": "Mostre equipamentos de resfriamento",
+      "response": "Encontrei o chiller M10500045 para água gelada.",
+      "evaluation": {
+        "relevance": 5,
+        "technical_accuracy": 5,
+        "completeness": 3,
+        "grounding": 5,
+        "clarity": 5,
+        "faithfulness": 5,
+        "overall_score": 4.5,
+        "justification": "A resposta está diretamente relacionada à pergunta do usuário e fornece informações precisas e claras sobre o equipamento de resfriamento.",
+        "strengths": "Relevância, precisão técnica, clareza e fundamentação são pontos fortes da resposta.",
+        "weaknesses": "A resposta poderia ser mais completa, fornecendo mais detalhes sobre o equipamento ou outros equipamentos de resfriamento disponíveis."
+      }
+    },
+    {
+      "query": "Qual o código do robô de pintura?",
+      "response": "O código é M08700012.",
+      "evaluation": {
+        "relevance": 5,
+        "technical_accuracy": 5,
+        "completeness": 5,
+        "grounding": 5,
+        "clarity": 5,
+        "faithfulness": 5,
+        "overall_score": 5,
+        "justification": "A resposta está perfeitamente alinhada com a pergunta e o contexto fornecido, apresentando o código do robô de pintura de forma clara e precisa.",
+        "strengths": "Resposta direta, clara e tecnicamente correta, que atende completamente à pergunta do usuário.",
+        "weaknesses": "Não há pontos fracos identificados, pois a resposta atende a todos os critérios de avaliação."
+      }
+    }
+  ]
+}

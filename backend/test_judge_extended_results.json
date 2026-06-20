@@ -1,0 +1,381 @@
+{
+  "metadata": {
+    "judge_model": "llama-3.3-70b-versatile",
+    "num_test_cases": 20,
+    "evaluation_date": "2026-01-01 12:55:16"
+  },
+  "aggregate_metrics": {
+    "num_evaluations": 20,
+    "average_scores": {
+      "relevance": 5.0,
+      "technical_accuracy": 5.0,
+      "completeness": 4.4,
+      "grounding": 5.0,
+      "clarity": 5.0,
+      "faithfulness": 5.0,
+      "overall_score": 4.87
+    },
+    "score_distribution": {
+      "excellent (4.5-5.0)": 20,
+      "good (3.5-4.4)": 0,
+      "fair (2.5-3.4)": 0,
+      "poor (1.5-2.4)": 0,
+      "very_poor (1.0-1.4)": 0
+    },
+    "score_distribution_percentage": {
+      "excellent (4.5-5.0)": 100.0,
+      "good (3.5-4.4)": 0.0,
+      "fair (2.5-3.4)": 0.0,
+      "poor (1.5-2.4)": 0.0,
+      "very_poor (1.0-1.4)": 0.0
+    },
+    "criteria_ranking": [
+      [
+        "relevance",
+        5.0
+      ],
+      [
+        "technical_accuracy",
+        5.0
+      ],
+      [
+        "grounding",
+        5.0
+      ],
+      [
+        "clarity",
+        5.0
+      ],
+      [
+        "faithfulness",
+        5.0
+      ],
+      [
+        "completeness",
+        4.4
+      ]
+    ]
+  },
+  "detailed_evaluations": [
+    {
+      "query": "Quais são os robôs de solda na funilaria?",
+      "response": "Na área de funilaria, especificamente na Body Shop Line 1, temos o robô de solda código M09400123. Este é um robô de 6 eixos utilizado para soldagem de painéis laterais.",
+      "evaluation": {
+        "relevance": 5,
+        "technical_accuracy": 5,
+        "completeness": 5,
+        "grounding": 5,
+        "clarity": 5,
+        "faithfulness": 5,
+        "overall_score": 5,
+        "justification": "A resposta está perfeitamente alinhada com a pergunta e fornece informações precisas e completas sobre o robô de solda na funilaria.",
+        "strengths": "Relevância, precisão técnica, completude, fundamentação e clareza.",
+        "weaknesses": "Nenhum ponto fraco identificado."
+      }
+    },
+    {
+      "query": "Mostre equipamentos de prensa na funilaria",
+      "response": "Encontrei a prensa hidráulica M09401567 de 500 toneladas no Press Shop da funilaria.",
+      "evaluation": {
+        "relevance": 5,
+        "technical_accuracy": 5,
+        "completeness": 5,
+        "grounding": 5,
+        "clarity": 5,
+        "faithfulness": 5,
+        "overall_score": 5,
+        "justification": "A resposta está perfeitamente alinhada com a pergunta do usuário e utiliza informações do contexto de forma precisa.",
+        "strengths": "Relevância, precisão técnica, completude, fundamentação e clareza.",
+        "weaknesses": "Nenhum ponto fraco identificado."
+      }
+    },
+    {
+      "query": "Qual o sistema de transporte da funilaria?",
+      "response": "O sistema de transporte é o AGV automatizado, código M09402890, localizado na Body Shop Line 2.",
+      "evaluation": {
+        "relevance": 5,
+        "technical_accuracy": 5,
+        "completeness": 5,
+        "grounding": 5,
+        "clarity": 5,
+        "faithfulness": 5,
+        "overall_score": 5,
+        "justification": "A resposta está perfeitamente alinhada com a pergunta e o contexto fornecido, apresentando todos os detalhes necessários de forma clara.",
+        "strengths": "Resposta clara, completa, tecnicamente correta e fiel ao contexto.",
+        "weaknesses": "Não foram identificados pontos fracos significativos na resposta."
+      }
+    },
+    {
+      "query": "Tem robô de manipulação de peças?",
+      "response": "Sim, temos o robô manipulador KUKA de 6 eixos, código M09403124, na área de Parts Handling.",
+      "evaluation": {
+        "relevance": 5,
+        "technical_accuracy": 5,
+        "completeness": 5,
+        "grounding": 5,
+        "clarity": 5,
+        "faithfulness": 5,
+        "overall_score": 5,
+        "justification": "A resposta está perfeitamente alinhada com a pergunta do usuário e fornece informações precisas e completas.",
+        "strengths": "Resposta clara, precisa e bem fundamentada, utilizando informações do contexto de forma apropriada.",
+        "weaknesses": "Nenhum ponto fraco identificado."
+      }
+    },
+    {
+      "query": "Equipamentos de inspeção na funilaria",
+      "response": "Na área de Quality Control temos o sistema de visão 3D M09404567 para inspeção dimensional.",
+      "evaluation": {
+        "relevance": 5,
+        "technical_accuracy": 5,
+        "completeness": 3,
+        "grounding": 5,
+        "clarity": 5,
+        "faithfulness": 5,
+        "overall_score": 4.5,
+        "justification": "A resposta está diretamente relacionada à pergunta e fornece informações precisas e claras sobre o sistema de visão 3D para inspeção dimensional.",
+        "strengths": "Relevância, precisão técnica, clareza e fundamentação",
+        "weaknesses": "Completude, pois a resposta poderia incluir mais detalhes sobre o sistema de visão 3D"
+      }
+    },
+    {
+      "query": "Qual o código do robô de pintura?",
+      "response": "O código do robô de pintura é M08700012, um robô ABB de 7 eixos localizado na Paint Shop Line 1.",
+      "evaluation": {
+        "relevance": 5,
+        "technical_accuracy": 5,
+        "completeness": 5,
+        "grounding": 5,
+        "clarity": 5,
+        "faithfulness": 5,
+        "overall_score": 5,
+        "justification": "A resposta está perfeitamente alinhada com a pergunta e o contexto fornecido, apresentando todos os detalhes necessários de forma clara e precisa.",
+        "strengths": "Resposta direta, clara, completa e tecnicamente precisa, utilizando informações do contexto de forma apropriada.",
+        "weaknesses": "Não foram identificados pontos fracos significativos na resposta gerada."
+      }
+    },
+    {
+      "query": "Sistema de cura de pintura",
+      "response": "O sistema de cura é o forno M08701234 que opera com infravermelho a 180°C, localizado na Curing Oven.",
+      "evaluation": {
+        "relevance": 5,
+        "technical_accuracy": 5,
+        "completeness": 5,
+        "grounding": 5,
+        "clarity": 5,
+        "faithfulness": 5,
+        "overall_score": 5,
+        "justification": "A resposta está perfeitamente alinhada com a pergunta e o contexto fornecido, demonstrando alta precisão técnica e clareza.",
+        "strengths": "Resposta direta, clara e tecnicamente correta, utilizando informações do contexto de forma apropriada.",
+        "weaknesses": "Nenhum ponto fraco identificado na resposta gerada."
+      }
+    },
+    {
+      "query": "Cabine de pintura principal",
+      "response": "A cabine principal é a M08702456 na Paint Booth 1, equipada com sistema de exaustão e filtração.",
+      "evaluation": {
+        "relevance": 5,
+        "technical_accuracy": 5,
+        "completeness": 5,
+        "grounding": 5,
+        "clarity": 5,
+        "faithfulness": 5,
+        "overall_score": 5,
+        "justification": "A resposta está perfeitamente alinhada com a pergunta e o contexto fornecido, apresentando informações precisas e completas.",
+        "strengths": "Relevância, precisão técnica, completude, fundamentação e clareza",
+        "weaknesses": "Nenhum ponto fraco identificado"
+      }
+    },
+    {
+      "query": "Equipamento de preparação de tinta",
+      "response": "O equipamento de preparação é o sistema M08703789 na Paint Kitchen, com dosagem e mistura automática.",
+      "evaluation": {
+        "relevance": 5,
+        "technical_accuracy": 5,
+        "completeness": 4,
+        "grounding": 5,
+        "clarity": 5,
+        "faithfulness": 5,
+        "overall_score": 4.83,
+        "justification": "A resposta está diretamente relacionada à pergunta e fornece informações precisas e claras sobre o equipamento de preparação de tinta.",
+        "strengths": "Relevância, precisão técnica, clareza e fundamentação sólida.",
+        "weaknesses": "Pode ser considerada ligeiramente incompleta por não fornecer detalhes adicionais sobre o funcionamento ou especificações do equipamento."
+      }
+    },
+    {
+      "query": "Sistema de limpeza antes da pintura",
+      "response": "O sistema de limpeza é o túnel M08704012 no Pre-treatment com 12 estágios de lavagem e fosfatização.",
+      "evaluation": {
+        "relevance": 5,
+        "technical_accuracy": 5,
+        "completeness": 5,
+        "grounding": 5,
+        "clarity": 5,
+        "faithfulness": 5,
+        "overall_score": 5,
+        "justification": "A resposta está perfeitamente alinhada com a pergunta e o contexto fornecido, apresentando precisão técnica e clareza.",
+        "strengths": "Resposta clara, precisa e bem fundamentada, utilizando informações do contexto de forma apropriada.",
+        "weaknesses": "Nenhum ponto fraco identificado."
+      }
+    },
+    {
+      "query": "Estação de montagem do motor",
+      "response": "A estação de montagem do motor é a M11200345 no Engine Assembly, totalmente robotizada.",
+      "evaluation": {
+        "relevance": 5,
+        "technical_accuracy": 5,
+        "completeness": 5,
+        "grounding": 5,
+        "clarity": 5,
+        "faithfulness": 5,
+        "overall_score": 5,
+        "justification": "A resposta está perfeitamente alinhada com a query do usuário e o contexto recuperado.",
+        "strengths": "Relevância, precisão técnica, completude, fundamentação e clareza.",
+        "weaknesses": "Nenhum ponto fraco identificado."
+      }
+    },
+    {
+      "query": "Sistema de parafusadeiras da montagem",
+      "response": "O sistema de parafusadeiras é o M11201678 na Final Assembly Line, com controle eletrônico de torque.",
+      "evaluation": {
+        "relevance": 5,
+        "technical_accuracy": 5,
+        "completeness": 4,
+        "grounding": 5,
+        "clarity": 5,
+        "faithfulness": 5,
+        "overall_score": 4.8,
+        "justification": "A resposta está diretamente relacionada à pergunta do usuário e fornece informações precisas e claras sobre o sistema de parafusadeiras.",
+        "strengths": "Relevância, precisão técnica, clareza e fundamentação sólida.",
+        "weaknesses": "Completude poderia ser melhorada com mais detalhes sobre o funcionamento ou especificações do sistema."
+      }
+    },
+    {
+      "query": "Equipamento de teste de portas",
+      "response": "A bancada de teste de portas é a M11202901 no Door Assembly, para teste de abertura e fechamento.",
+      "evaluation": {
+        "relevance": 5,
+        "technical_accuracy": 5,
+        "completeness": 4,
+        "grounding": 5,
+        "clarity": 5,
+        "faithfulness": 5,
+        "overall_score": 4.83,
+        "justification": "A resposta está perfeitamente alinhada com a query do usuário e o contexto recuperado, apresentando informações precisas e claras.",
+        "strengths": "Relevância, precisão técnica, clareza e fundamentação sólida",
+        "weaknesses": "Completude poderia ser melhorada com mais detalhes sobre o equipamento"
+      }
+    },
+    {
+      "query": "Sistema de elevação de chassis",
+      "response": "O sistema de elevação é o M11203234 na Chassis Line, com acionamento hidráulico.",
+      "evaluation": {
+        "relevance": 5,
+        "technical_accuracy": 5,
+        "completeness": 4,
+        "grounding": 5,
+        "clarity": 5,
+        "faithfulness": 5,
+        "overall_score": 4.83,
+        "justification": "A resposta está perfeitamente alinhada com a pergunta e o contexto, apresentando informações precisas e claras.",
+        "strengths": "Relevância, precisão técnica, clareza e fundamentação",
+        "weaknesses": "Completude poderia ser melhorada com mais detalhes sobre o sistema de elevação"
+      }
+    },
+    {
+      "query": "Estação de instalação de vidros",
+      "response": "A estação é a M11204567 no Glass Installation, robotizada para instalação de para-brisas.",
+      "evaluation": {
+        "relevance": 5,
+        "technical_accuracy": 5,
+        "completeness": 4,
+        "grounding": 5,
+        "clarity": 5,
+        "faithfulness": 5,
+        "overall_score": 4.83,
+        "justification": "A resposta está diretamente relacionada à pergunta e fornece informações precisas e claras sobre a estação de instalação de vidros.",
+        "strengths": "Relevância, precisão técnica, clareza e fundamentação",
+        "weaknesses": "Completude poderia ser melhorada com mais detalhes sobre a estação"
+      }
+    },
+    {
+      "query": "Mostre equipamentos de resfriamento",
+      "response": "Encontrei o chiller M10500045 na Chiller Plant, com capacidade de 500 TR para água gelada.",
+      "evaluation": {
+        "relevance": 5,
+        "technical_accuracy": 5,
+        "completeness": 5,
+        "grounding": 5,
+        "clarity": 5,
+        "faithfulness": 5,
+        "overall_score": 5,
+        "justification": "A resposta está perfeitamente alinhada com a pergunta do usuário e fornece informações precisas e completas sobre o equipamento de resfriamento.",
+        "strengths": "Resposta clara, precisa e completa, que atende à pergunta do usuário de forma eficaz.",
+        "weaknesses": "Nenhum ponto fraco identificado."
+      }
+    },
+    {
+      "query": "Sistema de ar comprimido",
+      "response": "O sistema de ar comprimido usa o compressor M10501234 de parafuso com 200 HP na Compressor Room.",
+      "evaluation": {
+        "relevance": 5,
+        "technical_accuracy": 5,
+        "completeness": 3,
+        "grounding": 5,
+        "clarity": 5,
+        "faithfulness": 5,
+        "overall_score": 4.5,
+        "justification": "A resposta está diretamente relacionada à pergunta e é tecnicamente correta, utilizando informações do contexto de forma fiel.",
+        "strengths": "Relevância, precisão técnica, clareza e fundamentação",
+        "weaknesses": "Completude, pois a resposta poderia incluir mais detalhes sobre o sistema de ar comprimido"
+      }
+    },
+    {
+      "query": "Equipamento de tratamento de água",
+      "response": "O tratamento de água usa o sistema M10502567 de osmose reversa com vazão de 10.000 L/h.",
+      "evaluation": {
+        "relevance": 5,
+        "technical_accuracy": 5,
+        "completeness": 4,
+        "grounding": 5,
+        "clarity": 5,
+        "faithfulness": 5,
+        "overall_score": 4.8,
+        "justification": "A resposta está diretamente relacionada à pergunta e apresenta informações precisas e claras sobre o equipamento de tratamento de água.",
+        "strengths": "Relevância, precisão técnica, clareza e fundamentação sólida.",
+        "weaknesses": "Pode ser considerada parcialmente completa, pois não fornece detalhes adicionais sobre o funcionamento ou manutenção do equipamento."
+      }
+    },
+    {
+      "query": "Gerador de emergência",
+      "response": "O gerador de emergência é o M10503890 na Power House, diesel com 1500 kVA trifásico.",
+      "evaluation": {
+        "relevance": 5,
+        "technical_accuracy": 5,
+        "completeness": 5,
+        "grounding": 5,
+        "clarity": 5,
+        "faithfulness": 5,
+        "overall_score": 5,
+        "justification": "A resposta está perfeitamente alinhada com a pergunta e o contexto fornecido, apresentando informações precisas e completas.",
+        "strengths": "Relevância, precisão técnica, completude, fundamentação e clareza.",
+        "weaknesses": "Nenhum ponto fraco identificado."
+      }
+    },
+    {
+      "query": "Sistema de exaustão da planta",
+      "response": "O sistema de exaustão utiliza o ventilador centrífugo M10504123 com capacidade de 50.000 m³/h.",
+      "evaluation": {
+        "relevance": 5,
+        "technical_accuracy": 5,
+        "completeness": 3,
+        "grounding": 5,
+        "clarity": 5,
+        "faithfulness": 5,
+        "overall_score": 4.5,
+        "justification": "A resposta está diretamente relacionada à pergunta e utiliza informações do contexto de forma precisa.",
+        "strengths": "Relevância, precisão técnica, clareza e fundamentação são pontos fortes.",
+        "weaknesses": "A resposta poderia ser mais completa, fornecendo detalhes adicionais sobre o sistema de exaustão."
+      }
+    }
+  ]
+}
